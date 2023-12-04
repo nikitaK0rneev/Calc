@@ -11,9 +11,9 @@ public class Main {
     public static String calc(String input) {
         int num1 = 0;
         int num2 = 0;
-        String num1str = getOperands(input)[0];
-        String num2str = getOperands(input)[2];
-        String operator = getOperands(input)[1];
+        String num1str = getOperands(input)[0].trim();
+        String num2str = getOperands(input)[1].trim();
+        String operator = getOperation(input);
         if (!isArabic(num1str) && !isArabic(num2str)){
             num1 = romanToArabic(num1str);
             num2 = romanToArabic(num2str);
@@ -86,8 +86,8 @@ public class Main {
         return isArabic;
     }
     public static String[] getOperands(String input) {
-        String[] operands = input.split(" ");
-        if (operands.length !=3){
+        String[] operands = input.split("[-+*/]");
+        if (operands.length !=2){
             throw new IllegalArgumentException("Неверный формат выражения");
         }
         return operands;
@@ -97,6 +97,23 @@ public class Main {
             throw new IllegalArgumentException("Принимаются только числа от 1 до 10 включительно");
         }
     }
+    public static String getOperation(String input){
+        String operation = "";
+        if (input.contains("+")){
+            operation =  "+";
+        }
+        if (input.contains("-")){
+            operation =  "-";
+        }
+        if (input.contains("*")){
+            operation =  "*";
+        }
+        if (input.contains("/")){
+            operation =  "/";
+        }
+        return operation;
+    }
+
 
 }
 
